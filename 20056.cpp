@@ -88,7 +88,7 @@ int main(void) {
 			Fire.s = s;
 			Fire.d = d;
 			v[nx][ny].push_back({ m,{s,d} });
-	
+
 		}
 
 		for (int i = 1; i <= N; i++)
@@ -125,7 +125,7 @@ int main(void) {
 						{
 							for (int l = 0; l < 4; l++)
 							{
-								
+
 								v[i][j].push_back({ newm,{news,2 * l + 1} });
 							}
 						}
@@ -133,7 +133,7 @@ int main(void) {
 						{
 							for (int l = 0; l < 4; l++)
 							{
-								
+
 								v[i][j].push_back({ newm,{news,2 * l} });
 							}
 						}
@@ -151,7 +151,7 @@ int main(void) {
 			for (int k = 0; k < v[i][j].size(); k++)
 			{
 				ans += v[i][j][k].first;
-			
+
 			}
 		}
 	}
