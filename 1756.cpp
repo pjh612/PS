@@ -12,7 +12,7 @@ using namespace std;
 
 int arr[300001];
 int arr2[300001];
-int d[300001];
+int dp[300001];
 int main(void) {
 
 
@@ -34,11 +34,21 @@ int main(void) {
 	{
 		if (arr[i] < min)
 			min = arr[i];
-		d[i] = min;
-		
+		dp[i] = min;
+
 	}
-	for (int i = 0; i < d; i++)
+	
+	reverse(dp, dp + d);
+	/*for (int i = 0; i < d; i++)
 	{
-		cout << d[i] << '\n';
+		cout << dp[i] << '\n';
 	}
+	cout << '\n';*/
+	int idx2 = 0;
+	for (int i = 0; i < n; i++) {
+	auto idx =	lower_bound(dp+idx2+1, dp + d, arr2[i]);
+	idx2= idx - dp;
+	//cout << idx2 << '\n';
+	}
+	cout << d - idx2;
 }
