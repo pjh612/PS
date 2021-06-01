@@ -36,12 +36,10 @@ void pre(int in_s, int in_e, int post_s, int post_e)
 		return ;
 
 	int i = idx[post[post_e]];
-	cout << in[i] << ' ';
+	cout << post[post_e] << ' ';
 	int left = i - in_s;
 	pre(in_s, i - 1, post_s, post_s + left - 1);
 	pre(i + 1, in_e, post_s +  left, post_e - 1);
-
-
 }
 
 
