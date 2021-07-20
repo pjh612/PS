@@ -28,27 +28,27 @@ int main()
 	int ans = 0;
 	memset(dp, -1, sizeof(dp));
 
-	ans = solution(1, 1);
+	ans = solution(n, m);
 	cout << ans;
 
 }
 int solution(int idx, int cnt)
 {
-	if (idx != n && cnt == m)
+	if (idx != 1 && cnt == 1)
 	{
 		return -987654321;
 	}
-	if (idx == n)
+	if (idx == 1)
 	{
 		return 0;
 	}
 	if (dp[idx][cnt] != -1)
 		return  dp[idx][cnt];
 	dp[idx][cnt] = -987654321;
-	for (int i = idx + 1; i <= n; i++)
+	for (int i = 1; i < idx; i++)
 	{
-		if (arr[idx][i])
-			dp[idx][cnt] = max(dp[idx][cnt], solution(i, cnt + 1) + arr[idx][i]);
+		if (arr[i][idx])
+			dp[idx][cnt] = max(dp[idx][cnt], solution(i, cnt - 1) + arr[i][idx]);
 	}
 	return dp[idx][cnt];
 }
