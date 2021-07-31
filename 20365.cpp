@@ -57,11 +57,5 @@ int main(void)
 		}
 		pre2 = s[i];
 	}
-	/*for (int i = 0; i < n; i++)
-	{
-		cout << arr2[i] << ' ';
-	}
-	cout << '\n';
-	cout << arr[n - 1] << ' ' << arr2[n - 1]<<'\n';*/
 	cout << min(arr[n - 1], arr2[n - 1]);
 }
