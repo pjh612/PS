@@ -1,21 +1,17 @@
 package P72410_신규_아이디_추천;
 class Solution {
     public String solution(String new_id) {
-        new_id = new_id.toLowerCase();
+        String filtered = new_id.toLowerCase()
+                .chars()
+                .filter(this::isAllowed)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
 
-        char[] charArray = new_id.toCharArray();
+
 
         StringBuilder sb = new StringBuilder();
-        for (char c : charArray) {
-            if (c == '-' || c == '_' || c == '.' || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
-                sb.append(c);
-            }
-        }
-
-        String tmp = sb.toString();
-        sb = new StringBuilder();
         char prev = 0;
-        for (char c : tmp.toCharArray()) {
+        for (char c : filtered.toCharArray()) {
             if (prev == '.' && c == '.') {
                 continue;
             }
@@ -24,13 +20,7 @@ class Solution {
             prev = c;
         }
 
-        if(sb.length() >=1 && sb.charAt(0) == '.') {
-            sb.deleteCharAt(0);
-        }
-
-        if(sb.length() >= 1 && sb.charAt(sb.length()-1) == '.') {
-            sb.deleteCharAt(sb.length()-1);
-        }
+        trimDot(sb);
 
         if(sb.length() ==0) {
             sb.append('a');
@@ -40,18 +30,25 @@ class Solution {
             sb.setLength(15);
         }
 
-        if(sb.charAt(sb.length()-1) == '.') {
-            sb.deleteCharAt(sb.length()-1);
+        trimDot(sb);
+
+
+        char c = sb.charAt(sb.length() - 1);
+        while(sb.length() <= 2) {
+            sb.append(c);
         }
 
-        if(sb.length() <= 2) {
-            char c = sb.charAt(sb.length() - 1);
-            while(sb.length() <= 2) {
-                sb.append(c);
-            }
-        }
 
         return sb.toString();
 
+    }
+
+    private boolean isAllowed(int c) {
+        return (c == '-' || c == '_' || c == '.' || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'));
+    }
+
+    private void trimDot(StringBuilder sb) {
+        if (sb.length() > 0 && sb.charAt(0) == '.') sb.deleteCharAt(0);
+        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '.') sb.deleteCharAt(sb.length() - 1);
     }
 }
